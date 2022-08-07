@@ -12,14 +12,9 @@ datasource db {
 
 model User {
   id         String  @id @default(uuid())
-  email      String  @unique
-  hash       String
-  first_name String
-  last_name  String
-  username   String  @unique
+  name       String
+  bio        String?
   posts      Plant[]
-
-  @@index([email])
 }
 
 model Plant {
@@ -39,10 +34,10 @@ model Plant {
 }
 
 model Action {
+  id          String   @id @default(uuid())
   type        String
   action_date DateTime 
   plant       Plant    @relation(fields: [plantId], references: [id])
   plantId     String
 
-  @@unique([type, action_date])
 }
